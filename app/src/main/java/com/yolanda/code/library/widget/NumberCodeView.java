@@ -25,21 +25,25 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+
 import com.yolanda.code.library.R;
-import com.yolanda.code.library.util.DimenUtil;
+import com.yolanda.code.library.util.PixelUtil;
+
 import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_NULL;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 /**
  * @author Created by yolanda on 2017/6/17.
  * @description 自定义输入框
  */
 public class NumberCodeView extends FrameLayout {
+
     private static final int[] STATE_NORMAL = {-android.R.attr.state_selected};
     private static final int[] STATE_SELECTED = {android.R.attr.state_selected};
     private static final int DEFAULT_TEXT_COLOR = 0xFFffffff;
-    private static final int DEFAULT_TEXT_SIZE = 60;   //px
-    private static final int DEFAULT_FRAME_SIZE = 80;  //px
+    private static final int DEFAULT_TEXT_SIZE = 30;   //dp
+    private static final int DEFAULT_FRAME_SIZE = 50;
     private static final int DEFAULT_FRAME_PADDING = 14;
     private static final int DEFAULT_CODE_LENGTH = 4;
     /**
@@ -102,6 +106,7 @@ public class NumberCodeView extends FrameLayout {
         }
     };
 
+
     public NumberCodeView(Context context) {
         this(context, null);
     }
@@ -112,6 +117,8 @@ public class NumberCodeView extends FrameLayout {
 
     public NumberCodeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        PixelUtil pixelUtil = new PixelUtil(context);
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NumberCodeView);
         int size = typedArray.getIndexCount();
         if (size > 0) {
@@ -123,21 +130,12 @@ public class NumberCodeView extends FrameLayout {
                         break;
                     case R.styleable.NumberCodeView_codeTextSize:
                         mCodeTextSize = typedArray.getDimensionPixelSize(attr, -1);
-                        if (DimenUtil.isPxVal(typedArray.peekValue(attr))) {
-                            mCodeTextSize = DimenUtil.getPercentHeightSizeBigger(mCodeTextSize);
-                        }
                         break;
                     case R.styleable.NumberCodeView_frameSize:
                         mFrameSize = typedArray.getDimensionPixelSize(attr, -1);
-                        if (DimenUtil.isPxVal(typedArray.peekValue(attr))) {
-                            mFrameSize = DimenUtil.getPercentHeightSizeBigger(mFrameSize);
-                        }
                         break;
                     case R.styleable.NumberCodeView_framePadding:
                         mFramePadding = typedArray.getDimensionPixelOffset(attr, -1);
-                        if (DimenUtil.isPxVal(typedArray.peekValue(attr))) {
-                            mFramePadding = DimenUtil.getPercentWidthSizeBigger(mFramePadding);
-                        }
                         break;
                     case R.styleable.NumberCodeView_codeLength:
                         mCodeLength = typedArray.getInt(attr, -1);
@@ -161,13 +159,13 @@ public class NumberCodeView extends FrameLayout {
             mCodeTextColor = DEFAULT_TEXT_COLOR;
         }
         if (mCodeTextSize == -1) {
-            mCodeTextSize = DimenUtil.getPercentHeightSizeBigger(DEFAULT_TEXT_SIZE);
+            mCodeTextSize = pixelUtil.dp2px(DEFAULT_TEXT_SIZE);
         }
         if (mFrameSize == -1) {
-            mFrameSize = DimenUtil.getPercentHeightSizeBigger(DEFAULT_FRAME_SIZE);
+            mFrameSize = pixelUtil.dp2px(DEFAULT_FRAME_SIZE);
         }
         if (mFramePadding == -1) {
-            mFramePadding = DimenUtil.getPercentWidthSizeBigger(DEFAULT_FRAME_PADDING);
+            mFramePadding = pixelUtil.dp2px(DEFAULT_FRAME_PADDING);
         }
         if (mCodeLength <= 0) {
             mCodeLength = DEFAULT_CODE_LENGTH;
@@ -200,24 +198,25 @@ public class NumberCodeView extends FrameLayout {
 
     /**
      * 是否显示键盘
+     *
      * @param showSystemKeyboard true为显示,false为不显示
      */
-    public void setShowKeyboard(boolean showSystemKeyboard){
+    public void setShowKeyboard(boolean showSystemKeyboard) {
         if (mShowSystemKeyboard == showSystemKeyboard) return;
         mShowSystemKeyboard = showSystemKeyboard;
-        if (mShowSystemKeyboard){
+        if (mShowSystemKeyboard) {
             mEditText.setInputType(TYPE_CLASS_NUMBER);
         } else {
             mEditText.setInputType(TYPE_NULL);
         }
     }
 
-    public EditText getInputView(){
+    public EditText getInputView() {
         return mEditText;
     }
 
-    public void setText(CharSequence text){
-        if (mEditText != null){
+    public void setText(CharSequence text) {
+        if (mEditText != null) {
             mEditText.setText(text);
         }
     }
@@ -284,7 +283,7 @@ public class NumberCodeView extends FrameLayout {
         if (heightSpecMode == MeasureSpec.AT_MOST) {
             height = mFrameSize;
         }
-        if (widthSpecMode == MeasureSpec.AT_MOST) {
+        if (widthSpecMode != MeasureSpec.EXACTLY) {
             width = (mCodeLength * mFrameSize) + (mFramePadding * (mCodeLength - 1));
         }
 
@@ -336,6 +335,7 @@ public class NumberCodeView extends FrameLayout {
 
     public interface OnNumberInputListener {
         void onInputFinish();
+
         void onInputIng();
     }
 }

@@ -6,6 +6,10 @@ import android.support.annotation.Nullable;
 
 import com.yolanda.code.library.widget.NumberCodeView;
 
+/**
+ * @author Created by yolanda on 2018/11/05.
+ * @description 输入框自动获取焦点
+ */
 public class NumberCodeActivity extends Activity{
     NumberCodeView mNumberCodeView;
     private String mInputCode;
