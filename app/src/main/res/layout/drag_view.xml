@@ -82,4 +82,10 @@
             android:text="按住按钮往右滑动,完成拼图验证" />
 
     </FrameLayout>
+    <com.yolanda.code.library.view.DiyStyleTextView
+        android:id="@+id/tv_diy_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="android开发者论坛"/>
 </LinearLayout>

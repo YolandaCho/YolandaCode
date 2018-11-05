@@ -46,6 +46,12 @@ public class DiyStyleTextView extends AppCompatTextView {
         return this;
     }
 
+    /**
+     * 设置需要改变颜色的文本
+     * @param colorRegex　需要改变颜色的内容
+     * @param color　颜色  
+     * @return
+     */
     public DiyStyleTextView setColorRegex(String colorRegex, int color) {
         setMovementMethod(LinkMovementMethod.getInstance());
         this.colorRegex = colorRegex;

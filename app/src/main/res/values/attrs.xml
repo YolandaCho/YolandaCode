@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NumberCodeView">
+        <attr name="codeTextColor" format="color|reference" />
+        <attr name="codeTextSize" format="reference|dimension" />
+        <attr name="frameSize" format="reference|dimension" />
+        <attr name="framePadding" format="reference|dimension" />
+        <attr name="codeLength" format="integer|reference" />
+        <attr name="frameDrawableId" format="reference" />
+        <attr name="normal" format="reference" />
+        <attr name="select" format="reference" />
+    </declare-styleable>
+</resources>

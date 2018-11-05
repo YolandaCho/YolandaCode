@@ -1,4 +1,5 @@
 package com.yolanda.code.library;
+
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -6,6 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
+
+import com.yolanda.code.library.view.DiyStyleTextView;
 import com.yolanda.code.library.widget.DragImageView;
 
 /**
@@ -14,6 +17,7 @@ import com.yolanda.code.library.widget.DragImageView;
  */
 public class DragImageCodeActivity extends Activity {
     DragImageView dragView;
+    DiyStyleTextView tvTest;
 
     private Handler handler;
 
@@ -28,10 +32,18 @@ public class DragImageCodeActivity extends Activity {
 
     public void initView() {
         dragView = (DragImageView) findViewById(R.id.dragView);
+        tvTest = (DiyStyleTextView) findViewById(R.id.tv_diy_test);
+
         dragView.setUp(BitmapFactory.decodeResource(getResources(), R.drawable.drag_cover),
                 BitmapFactory.decodeResource(getResources(), R.drawable.drag_block),
                 BitmapFactory.decodeResource(getResources(), R.drawable.drag_cover_c),
                 0.377f);
+        // 设置需要改变颜色的部分
+//        tvTest.setColorRegex("Yolanda", 0xfff75151);
+//        tvTest.setText("android开发者论坛: Yolanda");
+//        tvTest.setDiyTextImage("android开发者论坛: Yolanda 8833", "[\\d]+",
+//                BitmapFactory.decodeResource(getResources(), R.drawable.drag_btn));
+        tvTest.setDiyTextColor("Yolanda -> 1994", "[\\d]+", 0xfff75151);
     }
 
     protected void initEvent() {
