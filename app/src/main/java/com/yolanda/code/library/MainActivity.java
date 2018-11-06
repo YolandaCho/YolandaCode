@@ -14,6 +14,9 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements View.OnClickListener{
     private Button btnDragImage;
     private Button btnNumberCode;
+    private Button btnProgress;
+    private Button btnVirtualKeyboard;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +27,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void init() {
         btnDragImage = (Button) findViewById(R.id.btn_drag_image);
         btnNumberCode = (Button) findViewById(R.id.btn_number_code);
+        btnProgress = (Button) findViewById(R.id.btn_progress);
+        btnVirtualKeyboard = (Button) findViewById(R.id.btn_virtual_keyboard);
         btnDragImage.setOnClickListener(this);
         btnNumberCode.setOnClickListener(this);
+        btnProgress.setOnClickListener(this);
+        btnVirtualKeyboard.setOnClickListener(this);
     }
 
     @Override
@@ -38,6 +45,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.btn_number_code:
                 Intent intentNumberCode = new Intent(MainActivity.this, NumberCodeActivity.class);
                 startActivity(intentNumberCode);
+                break;
+            case R.id.btn_progress:
+                Intent intentProgress = new Intent(MainActivity.this, ProgressActivity.class);
+                startActivity(intentProgress);
+                break;
+            case R.id.btn_virtual_keyboard:
+                Intent intentSwitch = new Intent(MainActivity.this, VirtualKeyboardActivity.class);
+                startActivity(intentSwitch);
                 break;
         }
     }

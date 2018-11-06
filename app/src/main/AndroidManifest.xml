@@ -19,6 +19,8 @@
 
         <activity android:name=".DragImageCodeActivity"/>
         <activity android:name=".NumberCodeActivity"/>
+        <activity android:name=".ProgressActivity"/>
+        <activity android:name=".VirtualKeyboardActivity"/>
     </application>
 
 </manifest>
